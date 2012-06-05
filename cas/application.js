@@ -107,8 +107,8 @@ window.$$=function getElementById(i){
 	
 	function exec(latex){
 		//Convert to javascript:
-		var expr=M(M.latex.parse(latex)).eval();
-		if(!expr.impliedBy(context)){
+		var expr=M(latex, context);
+		if(false && !expr.impliedBy(context)){
 			//throw(new Error("That statement may not be true."));
 			expr.className = "new";
 			context.learn(expr);
@@ -165,8 +165,8 @@ window.$$=function getElementById(i){
 					if(d.className){
 						this.current.className+=" "+d.className;
 					}
-					var assumptions=M.getAssumptions();
-					res=d.toLatex();
+					var assumptions=[]; //M.getAssumptions();
+					res=d.s('text/latex').s;
 					//res = exec(d).toLatex();
 					if(res==ctrlcodes.clear){
 						//
